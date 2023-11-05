@@ -1,22 +1,19 @@
-class Room {
-  constructor(roomId, roomTitle, namespaceId, privateRoom = false) {
-    this.roomId = roomId;
-    this.roomTitle = roomTitle;
-    this.namespaceId = namespaceId;
-    this.privateRoom = privateRoom;
-    this.history = [];
-  }
-
-  addMessage(message) {
-    if (this.history.length === 1000) {
-      this.history.splice(1);
+class Room{
+    constructor(roomId,roomTitle,namespaceId,privateRoom = false){
+        this.roomId = roomId;
+        this.roomTitle = roomTitle;
+        this.namespaceId = namespaceId;
+        this.privateRoom = privateRoom;
+        this.history = [];
     }
-    this.history.push(message);
-  }
 
-  clearHistory() {
-    this.history = [];
-  }
+    addMessage(message){
+        this.history.push(message);
+    }
+
+    clearHistory(){
+        this.history = [];
+    }
 }
 
 module.exports = Room;
