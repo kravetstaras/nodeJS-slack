@@ -1,10 +1,10 @@
 const joinRoom = async (roomTitle, namespaceId) => {
-  console.log(roomTitle, namespaceId);
+  roomTitle, namespaceId;
   const ackResp = await nameSpaceSockets[namespaceId].emitWithAck('joinRoom', {
     roomTitle,
     namespaceId,
   });
-  console.log(ackResp);
+  ackResp;
   document.querySelector(
     '.curr-room-num-users',
   ).innerHTML = `${ackResp.numUsers}<span class="fa-solid fa-user"></span>`;

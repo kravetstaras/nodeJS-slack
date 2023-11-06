@@ -12,7 +12,7 @@ const clientOptions = {
   },
 };
 
-const socket = io('http://localhost:9000', clientOptions);
+const socket = io('https://slack-clone-socketio.glitch.me', clientOptions);
 const nameSpaceSockets = [];
 const listeners = {
   nsChange: [],
@@ -23,7 +23,7 @@ let selectedNsId = 0;
 document.querySelector('#message-form').addEventListener('submit', e => {
   e.preventDefault();
   const newMessage = document.querySelector('#user-message').value;
-  console.log(newMessage, selectedNsId);
+  newMessage, selectedNsId;
   nameSpaceSockets[selectedNsId].emit('newMessageToRoom', {
     newMessage,
     date: Date.now(),
@@ -37,14 +37,14 @@ document.querySelector('#message-form').addEventListener('submit', e => {
 const addListeners = nsId => {
   if (!listeners.nsChange[nsId]) {
     nameSpaceSockets[nsId].on('nsChange', data => {
-      console.log('Namespace Changed!');
-      console.log(data);
+      ('Namespace Changed!');
+      data;
     });
     listeners.nsChange[nsId] = true;
   }
   if (!listeners.messageToRoom[nsId]) {
     nameSpaceSockets[nsId].on('messageToRoom', messageObj => {
-      console.log(messageObj);
+      messageObj;
       document.querySelector('#messages').innerHTML +=
         buildMessageHtml(messageObj);
     });
@@ -53,26 +53,28 @@ const addListeners = nsId => {
 };
 
 socket.on('connect', () => {
-  console.log('Connected!');
+  ('Connected!');
   socket.emit('clientConnect');
 });
 
 socket.on('nsList', nsData => {
   const lastNs = localStorage.getItem('lastNs');
-  console.log(nsData);
+  nsData;
   const nameSapcesDiv = document.querySelector('.namespaces');
   nameSapcesDiv.innerHTML = '';
   nsData.forEach(ns => {
     nameSapcesDiv.innerHTML += `<div class="namespace" ns="${ns.endpoint}"><img src="${ns.image}"></div>`;
     if (!nameSpaceSockets[ns.id]) {
-      nameSpaceSockets[ns.id] = io(`http://localhost:9000${ns.endpoint}`);
+      nameSpaceSockets[ns.id] = io(
+        `https://slack-clone-socketio.glitch.me${ns.endpoint}`,
+      );
     }
     addListeners(ns.id);
   });
 
   Array.from(document.getElementsByClassName('namespace')).forEach(element => {
     element.addEventListener('click', e => {
-      console.log(element);
+      element;
       joinNs(element, nsData);
     });
   });

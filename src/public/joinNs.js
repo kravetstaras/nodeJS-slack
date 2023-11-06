@@ -1,6 +1,6 @@
 const joinNs = (element, nsData) => {
   const nsEndpoint = element.getAttribute('ns');
-  console.log(nsEndpoint);
+  nsEndpoint;
 
   const clickedNs = nsData.find(row => row.endpoint === nsEndpoint);
   selectedNsId = clickedNs.id;
@@ -13,7 +13,7 @@ const joinNs = (element, nsData) => {
     if (i === 0) {
       firstRoom = room.roomTitle;
     }
-    console.log(room);
+    room;
     roomList.innerHTML += `<li class="room" namespaceId=${room.namespaceId}>
             <span class="fa-solid fa-${
               room.privateRoom ? 'lock' : 'globe'

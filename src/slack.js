@@ -21,11 +21,10 @@ app.get('/change-ns', (req, res) => {
 
 io.use((socket, next) => {
   const jwt = socket.handshake.query.jwt;
-  console.log(jwt);
   if (1) {
     next();
   } else {
-    console.log('Goodbye');
+    ('Goodbye');
     socket.disconnect();
   }
 });
@@ -36,7 +35,7 @@ io.on('connection', socket => {
 
   socket.emit('welcome', 'Welcome to the server.');
   socket.on('clientConnect', data => {
-    console.log(socket.id, 'has connected');
+    socket.id, 'has connected';
     socket.emit('nsList', namespaces);
   });
 });
@@ -73,7 +72,7 @@ namespaces.forEach(namespace => {
     });
 
     socket.on('newMessageToRoom', messageObj => {
-      console.log(messageObj);
+      messageObj;
       const rooms = socket.rooms;
       const currentRoom = [...rooms][1];
       io.of(namespace.endpoint)
@@ -83,7 +82,7 @@ namespaces.forEach(namespace => {
       const thisRoom = thisNs.rooms.find(
         room => room.roomTitle === currentRoom,
       );
-      console.log(thisRoom);
+      thisRoom;
       thisRoom.addMessage(messageObj);
     });
   });
