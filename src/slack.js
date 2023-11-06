@@ -1,11 +1,15 @@
 const express = require('express');
+const serverless = require('serverless-http');
 const app = express();
+const router = express.Router();
+
 const socketio = require('socket.io');
 const Room = require('./classes/Room');
 
 const namespaces = require('./data/namespaces');
 
 app.use(express.static(__dirname + '/public'));
+app.use('/netlify/functions/api', router);
 
 const expressServer = app.listen(9000);
 const io = socketio(expressServer);
@@ -88,3 +92,4 @@ namespaces.forEach(namespace => {
   });
 });
 
+module.exports.handler = serverless(app);
